@@ -11,6 +11,7 @@
 %greataligner_Место_Топ% (Требует настройки формата в конфиге)
 
 **Скриншоты:**
+
 <img width="499" height="459" alt="image" src="https://github.com/user-attachments/assets/549425b0-bb10-4930-b54c-f1a03c394d73" />
 <img width="534" height="494" alt="image" src="https://github.com/user-attachments/assets/08da2d5d-7e91-4dd3-a3ac-7676233b96ee" />
 
