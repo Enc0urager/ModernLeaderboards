@@ -1,0 +1,4 @@
+name: GreatAligner
+version: '${project.version}'
+main: dev.enco.greataligner.GreatAligner
+api-version: '1.16'
