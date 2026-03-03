@@ -1,4 +1,9 @@
 name: GreatAligner
 version: '${project.version}'
-main: dev.enco.greataligner.GreatAligner
+main: dev.enco.greataligner.Main
 api-version: '1.16'
+depend: [ajLeaderboards, PlaceholderAPI]
+commands:
+  greataligner:
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin.version}
