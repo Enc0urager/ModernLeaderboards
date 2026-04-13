@@ -5,11 +5,11 @@ import dev.enco.modernleaderboards.config.Config
 import dev.enco.modernleaderboards.math.Calculator
 import dev.enco.modernleaderboards.repository.LbRepository
 import dev.enco.modernleaderboards.utils.Colorizer
+import dev.enco.modernleaderboards.utils.PlaceholderFormatter
 import me.clip.placeholderapi.PlaceholderAPI
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import org.bukkit.ChatColor
 import org.bukkit.OfflinePlayer
-import java.text.MessageFormat
 
 class PapiExpansion(
     private val config: Config,
@@ -17,7 +17,8 @@ class PapiExpansion(
     override fun getIdentifier(): String = "greataligner"
     override fun getAuthor(): String = "Encourager"
     override fun getVersion(): String = "1.0"
-    override fun canRegister(): Boolean = true;
+    override fun canRegister(): Boolean = true
+    override fun persist(): Boolean = true
 
     override fun onRequest(player: OfflinePlayer?, params: String): String? {
         val scrolling = params.startsWith("scrolling_")
@@ -30,6 +31,8 @@ class PapiExpansion(
         fun ph(suffix: String) = PlaceholderAPI.setPlaceholders(player, "${base}_$suffix%")
         return formatEntry(player, place, lb, ph("prefix"), ph("name"), ph("value"))
     }
+
+    private val keys: Array<String> = arrayOf("{0}", "{1}", "{2}", "{3}", "{4}", "{5}")
 
     private fun formatEntry(player: OfflinePlayer?, place: Int, lb: String, prefix: String, name: String, value: String): String {
         val format = config.getLbFormat(lb) ?: return "Format not found"
@@ -50,7 +53,7 @@ class PapiExpansion(
         val pixelsNeeded = maxW - totalW
         val spaces = config.spaceSymbol.repeat((pixelsNeeded / config.spaceSymbolWidth).coerceAtLeast(0))
 
-        val result = MessageFormat.format(format, placeText, name, prefix, value, spaces, pixelsNeeded)
+        val result = PlaceholderFormatter.format(format, keys, arrayOf(placeText, name, prefix, value, spaces, pixelsNeeded.toString()))
         return PlaceholderAPI.setPlaceholders(player, Colorizer.colorize(result))
     }
 }
